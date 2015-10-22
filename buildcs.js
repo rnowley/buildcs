@@ -19,6 +19,9 @@ command.commandName = "mcs";
 command.debugFlag = commandBuilder.setBuildType(buildType);
 
 var configuration = commandBuilder.readConfigurationFile(argv.projectFile);
+commandBuilder.processConfiguration(configuration, command);
 console.log(configuration);
 
-console.log("command: " + command.commandName + " debugFlag: " + command.debugFlag);
+console.log("command: " + command.commandName + " debugFlag: " + command.debugFlag +
+			" outputFilename: " + command.outputFilename +
+			" sourceFiles: " + command.sourceFiles);

@@ -20,6 +20,13 @@ function setBuildType(buildType) {
 function Command() {
     this.commandName = '';
     this.debugFlag = '';
+    this.outputFilename = '';
+    this.sourceFiles = '';
+}
+
+function processConfiguration(configuration, command) {
+    command.outputFilename = configuration.outputFilename ? configuration.outputFilename : '';
+    command.sourceFiles = configuration.sourceFiles.join(', ');
 }
 
 function readConfigurationFile(filename) {
@@ -29,4 +36,5 @@ function readConfigurationFile(filename) {
 
 exports.setBuildType = setBuildType;
 exports.readConfigurationFile = readConfigurationFile;
+exports.processConfiguration = processConfiguration;
 exports.Command = Command;
