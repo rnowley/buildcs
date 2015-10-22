@@ -1,0 +1,21 @@
+{
+  "name": "buildcs",
+  "version": "0.0.1",
+  "description": "A build tool for mono that is controlled by a .json project file.",
+  "main": "buildcs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raymond Nowley",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rnowley/buildcs.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "yargs": "^3.29.0"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0"
+  }
+}
