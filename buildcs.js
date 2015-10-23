@@ -7,13 +7,13 @@ var argv = require('yargs')
     .default('projectFile', 'project.json', 'The name of the default project file.')
     .help('h')
     .argv;
-var commandBuilder = require('./commandBuilder')
+var commandBuilder = require('./commandBuilder');
+var Command = require('./command.js');
+var exec = require('child_process').exec;
 
 var buildType = argv.buildType;
 
-
-
-var command = new commandBuilder.Command();
+var command = new Command.Command();
 command.commandName = "mcs";
 
 command.debugFlag = commandBuilder.setBuildType(buildType);
@@ -22,6 +22,12 @@ var configuration = commandBuilder.readConfigurationFile(argv.projectFile);
 commandBuilder.processConfiguration(configuration, command);
 console.log(configuration);
 
-console.log("command: " + command.commandName + " debugFlag: " + command.debugFlag +
-			" outputFilename: " + command.outputFilename +
-			" sourceFiles: " + command.sourceFiles);
+exec(command.generateCommand(), function callback(error, stdout, stderr) {
+    console.log('stdout: ' + stdout);
+    console.log('stderr: ' + stderr);
+
+    if (error !== null) {
+      console.log('exec error: ' + error);
+    }
+
+});

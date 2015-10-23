@@ -7,7 +7,7 @@ function setBuildType(buildType) {
 
     switch(buildType.toLowerCase()) {
         case 'debug':
-            buildArg = "--debug";
+            buildArg = "-debug";
             break;
         default:
             buildArg = '';
@@ -17,16 +17,10 @@ function setBuildType(buildType) {
     return buildArg;
 }
 
-function Command() {
-    this.commandName = '';
-    this.debugFlag = '';
-    this.outputFilename = '';
-    this.sourceFiles = '';
-}
-
 function processConfiguration(configuration, command) {
-    command.outputFilename = configuration.outputFilename ? configuration.outputFilename : '';
-    command.sourceFiles = configuration.sourceFiles.join(', ');
+    command.outputFilename = configuration.outputFilename ? "-out:" + configuration.outputFilename : '';
+    command.sourceFiles = configuration.sourceFiles.join(' ');
+    command.buildTarget = extractBuildTarget(configuration);
 }
 
 function readConfigurationFile(filename) {
@@ -34,7 +28,24 @@ function readConfigurationFile(filename) {
     return config;
 }
 
+function buildProject(command) {
+    
+}
+
+function extractBuildTarget(configuration) {
+
+    switch(configuration.buildTarget){
+        case 'exe':
+        case 'library':
+        case 'module':
+        case 'winexe':
+            return '-target:' + configuration.buildTarget;
+        default:
+            return '-target:exe';
+    }
+
+}
+
 exports.setBuildType = setBuildType;
 exports.readConfigurationFile = readConfigurationFile;
 exports.processConfiguration = processConfiguration;
-exports.Command = Command;
