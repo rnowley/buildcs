@@ -1,7 +1,5 @@
 'use strict';
 
-var fs = require('fs');
-
 function setBuildType(buildType) {
     var buildArg;
 
@@ -26,22 +24,27 @@ function processConfiguration(configuration, command) {
     command.sourceFiles = extractSourceFileList(configuration, command.sourceDirectory);
     command.buildTarget = extractBuildTarget(configuration);
     command.references = extractReferences(configuration);
-}
-
-function readConfigurationFile(filename) {
-    var config = JSON.parse(fs.readFileSync(filename, 'utf8'));
-    return config;
+    command.libraryPath = extractLibraryPath(configuration);
 }
 
 function extractSourceFileList(configuration, sourceDirectory) {
 
     for (var i = 0; i < configuration.sourceFiles.length; ++i) {
         configuration.sourceFiles[i] = sourceDirectory + configuration.sourceFiles[i];
-        console.log(configuration.sourceFiles[i]);
     };
 
-    console.log("Source file list: " + configuration.sourceFiles.join(' '));
     return configuration.sourceFiles.join(' ');
+}
+
+function extractLibraryPath(configuration) {
+
+    if (!configuration.libraryPath) {
+        return '';
+    }
+
+    var libraryPath = configuration.libraryPath.join(',');
+
+    return "-lib:" + libraryPath;
 }
 
 function extractReferences(configuration) {
@@ -73,5 +76,4 @@ function extractBuildTarget(configuration) {
 }
 
 exports.setBuildType = setBuildType;
-exports.readConfigurationFile = readConfigurationFile;
 exports.processConfiguration = processConfiguration;

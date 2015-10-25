@@ -10,17 +10,19 @@ var argv = require('yargs')
 var commandBuilder = require('./commandBuilder');
 var Command = require('./command.js');
 var exec = require('child_process').exec;
+var fs = require('fs-extra');
 
 var buildType = argv.buildType;
 
 var command = new Command.Command();
-command.commandName = "mcs";
 
 command.debugFlag = commandBuilder.setBuildType(buildType);
 
-var configuration = commandBuilder.readConfigurationFile(argv.projectFile);
+var configuration = readConfigurationFile(argv.projectFile);
 commandBuilder.processConfiguration(configuration, command);
 console.log(command.generateCommand());
+
+ensureDestinationDirectoryExists(command);
 
 exec(command.generateCommand(), function callback(error, stdout, stderr) {
     console.log('stdout: ' + stdout);
@@ -31,3 +33,18 @@ exec(command.generateCommand(), function callback(error, stdout, stderr) {
     }
 
 });
+
+function ensureDestinationDirectoryExists(command) {
+
+	if(command.destinationDirectory !== '') {
+		fs.ensureDirSync(command.destinationDirectory,
+			function(err) {
+				console.log(err);
+			})
+	}
+}
+
+function readConfigurationFile(filename) {
+    var config = JSON.parse(fs.readFileSync(filename, 'utf8'));
+    return config;
+}

@@ -14,7 +14,7 @@ describe("CommandBuilder", function() {
         it("Should return the empty string when release is passed in", function() {
             var result = commandBuilder.setBuildType('release')
             expect(result).to.equal('');
-        })
+        });
     });
 
     describe("#processConfiguration", function() {
@@ -208,6 +208,41 @@ describe("CommandBuilder", function() {
 
             commandBuilder.processConfiguration(configuration, command);
             expect(command.outputFilename).to.equal('-out:./newbuild/hello');
+        });
+
+        it("Provide a library path and generates a library path option.", function() {
+            var configuration = {
+                "outputFilename": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ],
+                "libraryPath": [
+                    "./lib/"
+                ]
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.libraryPath).to.equal('-lib:./lib/');
+        });
+
+        it("Provide multiple library paths and generates a library path option with those paths separated by commas.", function() {
+            var configuration = {
+                "outputFilename": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ],
+                "libraryPath": [
+                    "./lib/",
+                    "./lib2/"
+                ]
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.libraryPath).to.equal('-lib:./lib/,./lib2/');
         });
     })
 })
