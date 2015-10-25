@@ -20,7 +20,7 @@ command.debugFlag = commandBuilder.setBuildType(buildType);
 
 var configuration = commandBuilder.readConfigurationFile(argv.projectFile);
 commandBuilder.processConfiguration(configuration, command);
-console.log(configuration);
+console.log(command.generateCommand());
 
 exec(command.generateCommand(), function callback(error, stdout, stderr) {
     console.log('stdout: ' + stdout);

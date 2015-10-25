@@ -18,9 +18,14 @@ function setBuildType(buildType) {
 }
 
 function processConfiguration(configuration, command) {
-    command.outputFilename = configuration.outputFilename ? "-out:" + configuration.outputFilename : '';
-    command.sourceFiles = configuration.sourceFiles.join(' ');
+    command.sourceDirectory = configuration.sourceDirectory ? configuration.sourceDirectory : command.sourceDirectory;
+    command.destinationDirectory = configuration.destinationDirectory ? configuration.destinationDirectory : command.destinationDirectory;
+    command.outputFilename = configuration.outputFilename
+        ? "-out:" + command.destinationDirectory + configuration.outputFilename
+        : '';
+    command.sourceFiles = extractSourceFileList(configuration, command.sourceDirectory);
     command.buildTarget = extractBuildTarget(configuration);
+    command.references = extractReferences(configuration);
 }
 
 function readConfigurationFile(filename) {
@@ -28,8 +33,29 @@ function readConfigurationFile(filename) {
     return config;
 }
 
-function buildProject(command) {
-    
+function extractSourceFileList(configuration, sourceDirectory) {
+
+    for (var i = 0; i < configuration.sourceFiles.length; ++i) {
+        configuration.sourceFiles[i] = sourceDirectory + configuration.sourceFiles[i];
+        console.log(configuration.sourceFiles[i]);
+    };
+
+    console.log("Source file list: " + configuration.sourceFiles.join(' '));
+    return configuration.sourceFiles.join(' ');
+}
+
+function extractReferences(configuration) {
+    if(!configuration.references) {
+        return '';
+    }
+
+    var referenceList = configuration.references.join(', ');
+
+    if(referenceList.length === 0) {
+        return '';
+    }
+
+    return '-r:' + referenceList;
 }
 
 function extractBuildTarget(configuration) {
