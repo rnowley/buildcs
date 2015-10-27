@@ -22,3 +22,5 @@ The available options are:
   -projectFile, The name of the project file to use to build the project. Defaults to "project.json" if not propvided.
   -h            Display help for this command.
 ```
+
+## The Structure of a Project File
