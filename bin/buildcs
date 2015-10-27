@@ -1,0 +1,6 @@
+#!/bin/sh
+
+basedir=`dirname "$0"`
+basedir=$basedir/../lib/
+
+node "$basedir/node_modules/buildcs/buildcs.js" "$@"

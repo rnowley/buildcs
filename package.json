@@ -1,8 +1,7 @@
 {
   "name": "buildcs",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A build tool for mono that is controlled by a .json project file.",
-  "main": "buildcs.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,5 +17,8 @@
   },
   "devDependencies": {
     "chai": "^3.4.0"
+  },
+  "bin": {
+    "buildcs": "bin/buildcs"
   }
 }
