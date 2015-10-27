@@ -4,7 +4,7 @@ Provides a way of building mono applications on Linux using a project definition
 ## Install
 
 ```sh
-$ npm install -g bower
+$ npm install -g buildcs
 ```
 
 To use buildcs to build a set of csharp files you must create a project.json file which must be in the root directory of the project.
