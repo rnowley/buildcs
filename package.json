@@ -1,6 +1,6 @@
 {
   "name": "buildcs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A build tool for mono that is controlled by a .json project file.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
