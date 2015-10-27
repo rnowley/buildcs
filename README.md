@@ -53,10 +53,10 @@ The available options are:
     ]
 }
 ```
-name: The name of the project.
-version: The current version of the project.
-description: A summary of the purpose of the application.
-references: A list of references used by the project.
-name: The name of the reference.
-path: The location of the dll, this is used for copying dlls to the output directory.
-sourceFiles: A list of source files to be compiled.
+* name: The name of the project.
+* version: The current version of the project.
+* description: A summary of the purpose of the application.
+* references: A list of references used by the project.
+  * name: The name of the reference.
+  * path: The location of the dll, this is used for copying dlls to the output directory.
+* sourceFiles: A list of source files to be compiled.
