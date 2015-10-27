@@ -161,7 +161,7 @@ describe("CommandBuilder", function() {
 
             var command = new Command.Command();
             commandBuilder.processConfiguration(configuration, command);
-            expect(command.references).to.equal('-r:System.Module.X, System.Module.Y');
+            expect(command.references).to.equal('-r:System.Module.X,System.Module.Y');
         });
 
         it("A new source directory is provided and files in source list are prefixed with this directory", function() {
