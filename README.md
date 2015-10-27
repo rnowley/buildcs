@@ -13,3 +13,12 @@ The project.json file has the following options:
 
 
 ## Usage
+```
+buildcs {OPTIONS}
+
+The available options are:
+
+  -buildType,   Used to indicate if the build is a "debug" or "release" build. It defaults to a "debug" build if not provided.
+  -projectFile, The name of the project file to use to build the project. Defaults to "project.json" if not propvided.
+  -h            Display help for this command.
+```
