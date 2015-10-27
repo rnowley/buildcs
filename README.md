@@ -1,5 +1,5 @@
 # buildcs
-Provides a way of building mono applications on Linux using a project definition defined in a .json file.
+Provides a way of building mono C# applications on Linux using a project definition defined in a .json file.
 
 ## Install
 
