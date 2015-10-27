@@ -52,7 +52,13 @@ function extractReferences(configuration) {
         return '';
     }
 
-    var referenceList = configuration.references.join(',');
+    var referenceNames = [];
+
+    for(var i = 0; i < configuration.references.length; ++i){
+        referenceNames.push(configuration.references[i].name);
+    }
+
+    var referenceList = referenceNames.join(',');
 
     if(referenceList.length === 0) {
         return '';

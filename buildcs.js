@@ -31,6 +31,9 @@ exec(command.generateCommand(), function callback(error, stdout, stderr) {
     if (error !== null) {
       console.log('exec error: ' + error);
     }
+    else {
+        copyReferencesToBuildDirectory(configuration, command);
+    }
 
 });
 
@@ -47,4 +50,31 @@ function ensureDestinationDirectoryExists(command) {
 function readConfigurationFile(filename) {
     var config = JSON.parse(fs.readFileSync(filename, 'utf8'));
     return config;
+}
+
+function copyReferencesToBuildDirectory(configuration, command) {
+
+    if(!configuration.references) {
+        return;
+    }
+
+    var destinationDirectory = command.destinationDirectory
+
+    for(var i = 0; i < configuration.references.length; ++i) {
+
+            if(configuration.references[i].path) {
+                var path = configuration.references[i].path;
+                var referenceName = configuration.references[i].name
+                var fileExtension = '.dll';
+                fs.copy(path + referenceName + fileExtension,
+                    destinationDirectory + referenceName + fileExtension,
+                    function (err) {
+
+                        if (err) {
+                            return console.error(err);
+                        }
+
+                    })
+            }
+    }
 }

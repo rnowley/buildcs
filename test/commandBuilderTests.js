@@ -136,7 +136,9 @@ describe("CommandBuilder", function() {
                     "hello.cs"
                 ],
                 "references": [
-                    "System.Module.X"
+                    {
+                        "name": "System.Module.X"
+                    }
                 ],
                 "buildTarget": "exe"
             };
@@ -153,8 +155,13 @@ describe("CommandBuilder", function() {
                     "hello.cs"
                 ],
                 "references": [
-                    "System.Module.X",
-                    "System.Module.Y"
+                    {
+                        "name": "System.Module.X",
+                        "path": "./lib"
+                    },
+                    {
+                        "name": "System.Module.Y"
+                    }
                 ],
                 "buildTarget": "exe"
             };
