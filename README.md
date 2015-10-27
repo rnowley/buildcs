@@ -44,7 +44,6 @@ The available options are:
         "goodbye.cs"
     ],
     "buildType": "exe",
-    "languageVersion": 6,
     "outputFilename": "hello",
     "sourceDirectory": "./src/",
     "destinationDirectory": "./build/",
@@ -60,3 +59,12 @@ The available options are:
   * name: The name of the reference.
   * path: The location of the dll, this is used for copying dlls to the output directory.
 * sourceFiles: A list of source files to be compiled.
+* buildType: The type of file produced by the build process, this can have the values:
+  * exe
+  * library
+  * module
+  * winexe
+* outputFilename: The filename to be given to the file produced by the build process. The file extension is determined by the build type.
+* sourceDirectory: The root directory where the source files are located.
+* destinationDirectory: The directory where the compiled file and reference dlls are to be output to.
+* libraryPath: A list of directories where the reference dlls are located.
