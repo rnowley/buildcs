@@ -7,7 +7,7 @@ describe("Command", function() {
     describe("#getFileSuffix", function() {
     	it("Command buildTarget is 'exe', should return '.exe'", function() {
     		var command = new Command.Command();
-    		command.buildTarget = 'exe';
+    		command.buildTarget = '-target:exe';
 
     		var result = command.getFileSuffix();
 
@@ -16,7 +16,7 @@ describe("Command", function() {
 
     	it("Command buildTarget is 'library', should return '.dll'", function() {
     		var command = new Command.Command();
-    		command.buildTarget = 'library';
+    		command.buildTarget = '-target:library';
 
     		var result = command.getFileSuffix();
 
@@ -25,7 +25,7 @@ describe("Command", function() {
 
     	it("Command buildTarget is 'module', should return '.netmodule'", function() {
     		var command = new Command.Command();
-    		command.buildTarget = 'module';
+    		command.buildTarget = '-target:module';
 
     		var result = command.getFileSuffix();
 
@@ -34,7 +34,7 @@ describe("Command", function() {
 
     	it("Command buildTarget is 'winexe', should return '.exe'", function() {
     		var command = new Command.Command();
-    		command.buildTarget = 'winexe';
+    		command.buildTarget = '-target:winexe';
 
     		var result = command.getFileSuffix();
 
