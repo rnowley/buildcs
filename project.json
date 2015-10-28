@@ -1,0 +1,18 @@
+{
+    "name": "hello",
+    "version": "0.0.1",
+    "references": [
+        "System",
+        "Nancy.Hosting.Self",
+        "Nancy",
+        "Nancy.ViewEngines.Razor"
+    ],
+    "sourceFiles": [
+        "hello.cs",
+        "goodbye.cs",
+        "main.cs"
+    ],
+    "buildTarget": "exe",
+    "languageVersion": 6,
+    "outputFilename": "hello.exe"
+}

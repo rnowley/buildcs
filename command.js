@@ -19,13 +19,13 @@ Command.prototype.generateCommand = function() {
 Command.prototype.getFileSuffix = function() {
 
 	switch(this.buildTarget) {
-		case 'exe':
+		case '-target:exe':
 			return '.exe';
-		case 'library':
+		case '-target:library':
 			return '.dll';
-		case 'module':
+		case '-target:module':
 			return '.netmodule';
-		case 'winexe':
+		case '-target:winexe':
 			return '.exe';
 		default:
 			return '.exe';
