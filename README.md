@@ -43,6 +43,16 @@ The available options are:
         "hello.cs",
         "goodbye.cs"
     ],
+    "resources": [
+        {
+            "source": "View/index.html",
+            "destination": "View/index.html"
+        },
+        {
+            "source": "View/Test/test.html",
+            "destination": "View/Test/test.html"
+        }
+    ],
     "buildType": "exe",
     "outputFilename": "hello",
     "sourceDirectory": "./src/",
@@ -59,6 +69,9 @@ The available options are:
   * name: The name of the reference.
   * path: The location of the dll, this is used for copying dlls to the output directory.
 * sourceFiles: A list of source files to be compiled.
+* resources: A list of non-compilable resources that need to be copied to the destination directory on a successful build.
+  * source: The source location of the resource file.
+  * destination: The destination where the resource file is to be copied to.
 * buildType: The type of file produced by the build process, this can have the values:
   * exe
   * library

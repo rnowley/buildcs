@@ -34,6 +34,7 @@ exec(command.generateCommand(), function callback(error, stdout, stderr) {
     }
     else {
         copyReferencesToBuildDirectory(configuration, command);
+        copyResources(configuration, command);
     }
 
 });
@@ -79,4 +80,26 @@ function copyReferencesToBuildDirectory(configuration, command) {
             }
 
     }
+}
+
+function copyResources(configuration, command) {
+
+    if(!configuration.resources) {
+        return;
+    }
+
+    for(var i = 0; i < configuration.resources.length; ++i) {
+        var source = configuration.resources[i].source;
+        var destination = configuration.resources[i].destination;
+        fs.copy(command.sourceDirectory + source,
+            command.destinationDirectory + destination,
+            function (err) {
+
+                if (err) {
+                    return console.error(err);
+                }
+
+            })
+    }
+
 }
