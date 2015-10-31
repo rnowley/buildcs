@@ -85,3 +85,11 @@ The available options are:
 * destinationDirectory: The directory where the compiled file and reference dlls are to be output to.
 * libraryPath: A list of directories where the reference dlls are located.
 * packageList: A list of packages to include in the build. A package is a list of related assemblies.
+
+## The default directory layout used
+
+└── root project directory
+    └── src
+        └── <Source code files go here>
+    └── project.json
+    └── build
