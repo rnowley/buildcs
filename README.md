@@ -59,6 +59,9 @@ The available options are:
     "destinationDirectory": "./build/",
     "libraryPath": [
         "./lib"
+    ],
+    "packageList": [
+        "gtk-sharp-2.0"
     ]
 }
 ```
@@ -81,3 +84,4 @@ The available options are:
 * sourceDirectory: The root directory where the source files are located.
 * destinationDirectory: The directory where the compiled file and reference dlls are to be output to.
 * libraryPath: A list of directories where the reference dlls are located.
+* packageList: A list of packages to include in the build. A package is a list of related assemblies.
