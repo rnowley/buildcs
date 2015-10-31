@@ -87,9 +87,10 @@ The available options are:
 * packageList: A list of packages to include in the build. A package is a list of related assemblies.
 
 ## The default directory layout used
-
+```
 └── root project directory
     └── src
         └── <Source code files go here>
     └── project.json
     └── build
+```
