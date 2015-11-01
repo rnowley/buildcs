@@ -35,6 +35,7 @@ gtksharpdemo
 ```
 
 ## gtkHelloWorld.cs
+This source code comes from http://www.mono-project.com/docs/gui/gtksharp/hello-world
 
 ```csharp
 using Gtk;
