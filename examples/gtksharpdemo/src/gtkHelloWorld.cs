@@ -118,7 +118,7 @@ public class GtkHelloWorld {
 				separator.Show();
 				break;
 			case 2:
-
+				break;
 		}
 	}
 
