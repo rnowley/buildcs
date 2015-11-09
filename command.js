@@ -19,7 +19,7 @@ Command.prototype.generateCommand = function() {
 Command.prototype.getFileSuffix = function() {
 
 	switch(this.buildTarget) {
-		case '-target:exe':
+        case '-target:exe':
 			return '.exe';
 		case '-target:library':
 			return '.dll';
