@@ -1,0 +1,20 @@
+{
+    "name": "GtkSharpDemo",
+    "version": "0.0.1",
+    "references": [
+        {
+            "name": "System.Drawing"
+        }
+    ],
+    "packageList": [
+        "gtk-sharp-2.0"
+    ],
+    "sourceFiles": [
+        "gtkHelloWorld.cs"
+    ],
+    "buildType": "exe",
+    "languageVersion": 6,
+    "outputFilename": "gtkHelloWorld",
+    "sourceDirectory": "./src/",
+    "destinationDirectory": "./build/"
+}

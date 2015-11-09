@@ -25,6 +25,7 @@ function processConfiguration(configuration, command) {
     command.buildTarget = extractBuildTarget(configuration);
     command.references = extractReferences(configuration);
     command.libraryPath = extractLibraryPath(configuration);
+    command.packageList = extractPackageList(configuration);
 }
 
 function extractSourceFileList(configuration, sourceDirectory) {
@@ -79,6 +80,27 @@ function extractBuildTarget(configuration) {
             return '-target:exe';
     }
 
+}
+
+function extractPackageList(configuration) {
+
+    if(!configuration.packageList) {
+        return '';
+    }
+
+    var packageNames = [];
+
+    for(var i = 0; i < configuration.packageList.length; ++i){
+        packageNames.push(configuration.packageList[i]);
+    }
+
+    var packageList = packageNames.join(',');
+
+    if(packageList.length === 0) {
+        return '';
+    }
+
+    return '-pkg:' + packageList;
 }
 
 exports.setBuildType = setBuildType;

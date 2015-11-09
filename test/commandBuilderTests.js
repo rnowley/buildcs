@@ -1,4 +1,4 @@
-'use strict';
+
 
 var expect = require("chai").expect;
 var commandBuilder = require('../commandBuilder.js');
@@ -250,6 +250,41 @@ describe("CommandBuilder", function() {
 
             commandBuilder.processConfiguration(configuration, command);
             expect(command.libraryPath).to.equal('-lib:./lib/,./lib2/');
+        });
+
+        it("Provide a single package name and generates a '-pkg' command for that package", function() {
+            var configuration = {
+                "outputFilename": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ],
+                "packageList": [
+                    "gtk-sharp-2.0"
+                ]
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.packageList).to.equal('-pkg:gtk-sharp-2.0');
+        });
+
+        it("Provide multiple package names and generates a '-pkg' command for those packages", function() {
+            var configuration = {
+                "outputFilename": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ],
+                "packageList": [
+                    "gtk-sharp-2.0",
+                    "olive"
+                ]
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.packageList).to.equal('-pkg:gtk-sharp-2.0,olive');
         });
     })
 })
