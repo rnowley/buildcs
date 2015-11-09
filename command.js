@@ -8,13 +8,12 @@ function Command() {
     this.sourceDirectory = "./src/";
     this.destinationDirectory = "./build/";
     this.libraryPath = '';
-    this.packageList = '';
 }
 
 Command.prototype.generateCommand = function() {
     return "" + this.commandName + " " + this.sourceFiles + " " + this.debugFlag + " " +
     this.outputFilename + this.getFileSuffix() + " " + this.buildTarget + " " + this.references +
-    " " + this.libraryPath + " " + this.packageList;
+    " " + this.libraryPath;
 }
 
 Command.prototype.getFileSuffix = function() {

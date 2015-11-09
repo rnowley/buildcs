@@ -25,16 +25,18 @@ commandBuilder.processConfiguration(configuration, command);
 
 ensureDestinationDirectoryExists(command);
 
+console.time('Build duration: ')
 exec(command.generateCommand(), function callback(error, stdout, stderr) {
-    console.log('stdout: ' + stdout);
-    console.log('stderr: ' + stderr);
 
     if (error !== null) {
       console.log('exec error: ' + error);
+      console.timeEnd('Build duration: ')
     }
     else {
         copyReferencesToBuildDirectory(configuration, command);
         copyResources(configuration, command);
+        console.log('Build successful.')
+        console.timeEnd('Build duration: ')
     }
 
 });
