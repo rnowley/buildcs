@@ -20,6 +20,7 @@ The available options are:
 
   --buildType,   Used to indicate if the build is a "debug" or "release" build. It defaults to a "debug" build if not provided.
   --projectFile, The name of the project file to use to build the project. Defaults to "project.json" if not provided.
+  --colours, This is used to indicate if the tool should use coloured output when printing to the console. The allowed values are true and false. It defaults to true.
   -h            Display help for this command.
 ```
 
