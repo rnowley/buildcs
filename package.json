@@ -1,6 +1,6 @@
 {
   "name": "buildcs",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A build tool for mono that is controlled by a .json project file.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "colors": "^1.1.2",
     "fs-extra": "^0.25.0",
     "yargs": "^3.29.0"
   },

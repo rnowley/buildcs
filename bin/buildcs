@@ -5,6 +5,8 @@ var argv = require('yargs')
     .default('buildType', 'debug', 'Defaults to a debug build.')
     .choices('buildType', ['debug', 'release'])
     .default('projectFile', 'project.json', 'The name of the default project file.')
+    .default('colours', 'true', 'Defaults to displaying colours for output text.')
+    .choices('colours', ['true', 'false'])
     .help('h')
     .argv;
 
@@ -13,8 +15,12 @@ var commandBuilder = require('../commandBuilder');
 var Command = require('../command.js');
 var exec = require('child_process').exec;
 var fs = require('fs-extra');
+var colours = require('colors/safe');
+
+colours.enabled = (argv.colours == 'true');
 
 var buildType = argv.buildType;
+var useColouredOutput = argv.colours;
 
 var command = new Command.Command();
 
@@ -25,18 +31,20 @@ commandBuilder.processConfiguration(configuration, command);
 
 ensureDestinationDirectoryExists(command);
 
-console.time('Build duration: ')
+var start = process.hrtime();
 exec(command.generateCommand(), function callback(error, stdout, stderr) {
+    var elapsedSeconds = process.hrtime(start)[0];
+    var elapsedNanoseconds = process.hrtime(start)[1];
 
     if (error !== null) {
-      console.log('exec error: ' + error);
-      console.timeEnd('Build duration: ')
+      console.log(colours.red('exec error: ' + error));
+      console.log(colours.red(generateDurationString(elapsedSeconds, elapsedNanoseconds)));
     }
     else {
         copyReferencesToBuildDirectory(configuration, command);
         copyResources(configuration, command);
-        console.log('Build successful.')
-        console.timeEnd('Build duration: ')
+        console.log(colours.green('Build successful.'));
+        console.log(colours.green(generateDurationString(elapsedSeconds, elapsedNanoseconds)));
     }
 
 });
@@ -49,6 +57,16 @@ function ensureDestinationDirectoryExists(command) {
 				console.log(err);
 			})
 	}
+}
+
+function generateDurationString(seconds, nanoseconds) {
+    var milliseconds = nanoseconds / 1000000;
+    var hours = Math.floor(seconds / 3600);
+    var remaining = seconds % 3600;
+    var minutes = Math.floor(remaining / 60);
+    seconds = remaining % 60;
+
+    return "Build took " + hours + ":" + minutes + ":" + seconds + "." + Math.round(milliseconds);
 }
 
 function readConfigurationFile(filename) {
