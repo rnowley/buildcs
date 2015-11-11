@@ -12,7 +12,7 @@
     "sourceFiles": [
         "gtkHelloWorld.cs"
     ],
-    "buildType": "exe",
+    "buildTarget": "exe",
     "languageVersion": 6,
     "outputFilename": "gtkHelloWorld",
     "sourceDirectory": "./src/",
