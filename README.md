@@ -1,5 +1,5 @@
 # buildcs
-Provides a way of building Mono C# applications on Linux using a project definition defined in a .json file. The aim of this utility is to allow the easy building of Mono C# projects without needing to use an IDE.
+Provides a way of building Mono C# applications on Linux using a project definition defined in a .json file. The aim of this utility is to allow Mono C# projects to be easily compiled without needing to use an IDE.
 
 ## Install
 
