@@ -54,7 +54,7 @@ The available options are:
             "destination": "View/Test/test.html"
         }
     ],
-    "buildType": "exe",
+    "buildTarget": "exe",
     "outputFilename": "hello",
     "sourceDirectory": "./src/",
     "destinationDirectory": "./build/",
@@ -76,7 +76,7 @@ The available options are:
 * __resources__: A list of non-compilable resources that need to be copied to the destination directory on a successful build.
   * __source__: The source location of the resource file.
   * __destination__: The destination where the resource file is to be copied to.
-* __buildType__: The type of file produced by the build process, this can have the values:
+* __buildTarget__: The type of file produced by the build process, this can have the values:
   * _exe_
   * _library_
   * _module_
