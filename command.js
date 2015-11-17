@@ -8,12 +8,14 @@ function Command() {
     this.sourceDirectory = "./src/";
     this.destinationDirectory = "./build/";
     this.libraryPath = '';
+    this.warningLevel = '';
 }
 
 Command.prototype.generateCommand = function() {
-    return "" + this.commandName + " " + this.sourceFiles + " " + this.debugFlag + " " +
-    this.outputFilename + this.getFileSuffix() + " " + this.buildTarget + " " + this.references +
-    " " + this.libraryPath;
+    var commandArray = [this.commandName, this.sourceFiles, this.debugFlag, this.outputFilename + this.getFileSuffix(),
+                        this.buildTarget, this.references, this.libraryPath,
+                        this.warningLevel];
+    return commandArray.join(' ');
 }
 
 Command.prototype.getFileSuffix = function() {

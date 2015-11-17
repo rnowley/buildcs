@@ -1,4 +1,4 @@
-
+'use strict';
 
 var expect = require("chai").expect;
 var commandBuilder = require('../commandBuilder.js');
@@ -285,6 +285,80 @@ describe("CommandBuilder", function() {
 
             commandBuilder.processConfiguration(configuration, command);
             expect(command.packageList).to.equal('-pkg:gtk-sharp-2.0,olive');
+        });
+
+        it("Configuration does not contain a warnLevel property. The command builder does not generate a '-warn' flag", function() {
+            var configuration = {
+                "name": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ]
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.warningLevel).to.equal('');
+        });
+
+        it("Configuration contains a warnLevel property of 2. The command builder generates a '-warn:2' flag", function() {
+            var configuration = {
+                "name": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ],
+                "warningLevel": 2
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.warningLevel).to.equal('-warn:2');
+        });
+
+        it("Configuration contains a warnLevel property of -1. The command builder does not generate a '-warn' flag", function() {
+            var configuration = {
+                "name": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ],
+                "warningLevel": -1
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.warningLevel).to.equal('');
+        });
+
+        it("Configuration contains a warnLevel property of 5. The command builder does not generate a '-warn' flag", function() {
+            var configuration = {
+                "name": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ],
+                "warningLevel": 5
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.warningLevel).to.equal('');
+        });
+
+        it("Configuration contains a warnLevel property that is not numeric. The command builder does not generate a '-warn' flag", function() {
+            var configuration = {
+                "name": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ],
+                "warningLevel": "This is wrong"
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.warningLevel).to.equal('');
         });
     })
 })

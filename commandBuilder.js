@@ -26,6 +26,7 @@ function processConfiguration(configuration, command) {
     command.references = extractReferences(configuration);
     command.libraryPath = extractLibraryPath(configuration);
     command.packageList = extractPackageList(configuration);
+    command.warningLevel = setWarningLevel(configuration);
 }
 
 function extractSourceFileList(configuration, sourceDirectory) {
@@ -46,6 +47,28 @@ function extractLibraryPath(configuration) {
     var libraryPath = configuration.libraryPath.join(',');
 
     return "-lib:" + libraryPath;
+}
+
+function setWarningLevel(configuration) {
+
+    if(!configuration.warningLevel) {
+        return '';
+    }
+
+    if(isNaN(configuration.warningLevel)) {
+        return '';
+    }
+
+    var level = parseInt(configuration.warningLevel, 10)
+
+    if(((level | 0) === level) && (level >= 0 && level <= 4)) {
+        return '-warn:' + level;
+    }
+    else {
+        console.log("Warning: Invalid value for warning level (" + configuration.warningLevel + "), using the default value for the compiler.");
+        return '';
+    }
+
 }
 
 function extractReferences(configuration) {

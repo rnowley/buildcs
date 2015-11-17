@@ -8,5 +8,6 @@
     "buildTarget": "exe",
     "outputFilename": "helloWorld",
     "sourceDirectory": "./src/",
-    "destinationDirectory": "./build/"
+    "destinationDirectory": "./build/",
+    "warningLevel": 4
 }
