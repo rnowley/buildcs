@@ -1,6 +1,6 @@
 {
   "name": "buildcs",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "A build tool for mono that is controlled by a .json project file.",
   "scripts": {
     "test": "mocha"
