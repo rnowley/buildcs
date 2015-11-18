@@ -64,7 +64,8 @@ The available options are:
     "packageList": [
         "gtk-sharp-2.0"
     ],
-    "warningLevel": 2
+    "warningLevel": 2,
+    "warningsAsErrors": false
 }
 ```
 * __name__: The name of the project.
@@ -88,6 +89,7 @@ The available options are:
 * __libraryPath__: A list of directories where the reference dlls are located.
 * __packageList__: A list of packages to include in the build. A package is a list of related assemblies.
 * __warningLevel__: This allows you to set the level of warning to be emitted for the compilation task this can be the values 0 (lowest warning) to 4 (highest warning). This is optional.
+* __warningsAsErrors__: This allows you to indicate to the compiler that that you want warnings to be treated as errors. The allowed values are true or false. It defaults to false. This is optional.
 
 ## The default directory layout used
 ```
