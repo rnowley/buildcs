@@ -9,12 +9,13 @@ function Command() {
     this.destinationDirectory = "./build/";
     this.libraryPath = '';
     this.warningLevel = '';
+    this.warningsAsErrors = '';
 }
 
 Command.prototype.generateCommand = function() {
     var commandArray = [this.commandName, this.sourceFiles, this.debugFlag, this.outputFilename + this.getFileSuffix(),
                         this.buildTarget, this.references, this.libraryPath,
-                        this.warningLevel];
+                        this.warningLevel, this.warningsAsErrors];
     return commandArray.join(' ');
 }
 

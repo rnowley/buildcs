@@ -9,5 +9,6 @@
     "outputFilename": "helloWorld",
     "sourceDirectory": "./src/",
     "destinationDirectory": "./build/",
-    "warningLevel": 4
+    "warningLevel": 4,
+    "warningsAsErrors": false
 }

@@ -27,6 +27,7 @@ function processConfiguration(configuration, command) {
     command.libraryPath = extractLibraryPath(configuration);
     command.packageList = extractPackageList(configuration);
     command.warningLevel = setWarningLevel(configuration);
+    command.warningsAsErrors = treatWarningsAsErrors(configuration);
 }
 
 function extractSourceFileList(configuration, sourceDirectory) {
@@ -47,28 +48,6 @@ function extractLibraryPath(configuration) {
     var libraryPath = configuration.libraryPath.join(',');
 
     return "-lib:" + libraryPath;
-}
-
-function setWarningLevel(configuration) {
-
-    if(!configuration.warningLevel) {
-        return '';
-    }
-
-    if(isNaN(configuration.warningLevel)) {
-        return '';
-    }
-
-    var level = parseInt(configuration.warningLevel, 10)
-
-    if(((level | 0) === level) && (level >= 0 && level <= 4)) {
-        return '-warn:' + level;
-    }
-    else {
-        console.log("Warning: Invalid value for warning level (" + configuration.warningLevel + "), using the default value for the compiler.");
-        return '';
-    }
-
 }
 
 function extractReferences(configuration) {
@@ -124,6 +103,47 @@ function extractPackageList(configuration) {
     }
 
     return '-pkg:' + packageList;
+}
+
+function setWarningLevel(configuration) {
+
+    if(!configuration.warningLevel) {
+        return '';
+    }
+
+    if(isNaN(configuration.warningLevel)) {
+        return '';
+    }
+
+    var level = parseInt(configuration.warningLevel, 10)
+
+    if(((level | 0) === level) && (level >= 0 && level <= 4)) {
+        return '-warn:' + level;
+    }
+    else {
+        console.log("Warning: Invalid value for warning level (" + configuration.warningLevel + "), using the default value for the compiler.");
+        return '';
+    }
+
+}
+
+function treatWarningsAsErrors(configuration) {
+
+    if(configuration.warningsAsErrors === 'undefined') {
+        return '';
+    }
+
+    if(typeof(configuration.warningsAsErrors) !== 'boolean') {
+        return '';
+    }
+
+
+    if(configuration.warningsAsErrors === true) {
+        return '-warnaserror+'
+    }
+    else {
+        return '-warnaserror-'
+    }
 }
 
 exports.setBuildType = setBuildType;

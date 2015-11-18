@@ -360,5 +360,68 @@ describe("CommandBuilder", function() {
             commandBuilder.processConfiguration(configuration, command);
             expect(command.warningLevel).to.equal('');
         });
+
+        it("configuration does not contain a warningsAsErrors property. The command builder property warningsAsErrors is an empty string", function() {
+            var configuration = {
+                "name": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ],
+                "warningLevel": "This is wrong"
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.warningsAsErrors).to.equal('');
+        });
+
+        it("configuration does not contains a warningsAsErrors property that is not a boolean. The command builder property warningsAsErrors is an empty string", function() {
+            var configuration = {
+                "name": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ],
+                "warningLevel": "This is wrong",
+                "warningsAsErrors": "elephant"
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.warningsAsErrors).to.equal('');
+        });
+
+        it("configuration contains a warningsAsErrors property that is set to true. The command builder property warningsAsErrors is '-warnaserror+'", function() {
+            var configuration = {
+                "name": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ],
+                "warningLevel": "This is wrong",
+                "warningsAsErrors": true
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.warningsAsErrors).to.equal('-warnaserror+');
+        });
+
+        it("configuration contains a warningsAsErrors property that is set to false. The command builder property warningsAsErrors is '-warnaserror-'", function() {
+            var configuration = {
+                "name": "hello",
+                "sourceFiles": [
+                    "hello.cs"
+                ],
+                "warningLevel": "This is wrong",
+                "warningsAsErrors": false
+            };
+
+            var command = new Command.Command();
+
+            commandBuilder.processConfiguration(configuration, command);
+            expect(command.warningsAsErrors).to.equal('-warnaserror-');
+        });
     })
 })

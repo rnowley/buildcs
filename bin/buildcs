@@ -13,11 +13,17 @@ var argv = require('yargs')
 
 var commandBuilder = require('../commandBuilder');
 var Command = require('../command.js');
-var exec = require('child_process').exec;
+var exec = require('child_process').exec, child;
 var fs = require('fs-extra');
 var colours = require('colors/safe');
 
 colours.enabled = (argv.colours == 'true');
+
+colours.setTheme({
+    error: 'red',
+    info: 'green',
+    warn: 'yellow'
+});
 
 var buildType = argv.buildType;
 var useColouredOutput = argv.colours;
@@ -32,21 +38,47 @@ commandBuilder.processConfiguration(configuration, command);
 ensureDestinationDirectoryExists(command);
 
 var start = process.hrtime();
-exec(command.generateCommand(), function callback(error, stdout, stderr) {
+var child = exec(command.generateCommand(), function callback(error, stdout, stderr) {
     var elapsedSeconds = process.hrtime(start)[0];
     var elapsedNanoseconds = process.hrtime(start)[1];
 
     if (error !== null) {
-      console.log(colours.red('exec error: ' + error));
-      console.log(colours.red(generateDurationString(elapsedSeconds, elapsedNanoseconds)));
+      console.log(colours.error('exec error: ' + error));
+      console.log(colours.error(generateDurationString(elapsedSeconds, elapsedNanoseconds)));
     }
     else {
         copyReferencesToBuildDirectory(configuration, command);
         copyResources(configuration, command);
-        console.log(colours.green('Build successful.'));
-        console.log(colours.green(generateDurationString(elapsedSeconds, elapsedNanoseconds)));
+        console.log(colours.info('Build successful.'));
+        console.log(colours.info(generateDurationString(elapsedSeconds, elapsedNanoseconds)));
     }
 
+});
+
+child.stdout.on('data', function(data) {
+    var output;
+
+    if(data.indexOf('Compilation failed') > -1) {
+        output = colours.error(data);
+    }
+    else {
+        output = colours.warn(data);
+    }
+
+    console.log(output);
+});
+
+child.stderr.on('data', function (data) {
+    var output;
+
+    if(data.indexOf('warning') > -1) {
+        output = colours.warn(data);
+    }
+    else {
+        output = colours.error(data);
+    }
+
+    console.log(output);
 });
 
 function ensureDestinationDirectoryExists(command) {
